@@ -19,8 +19,9 @@ public function store(Request $request)
 $request->validate([
 'name' => 'required|string',
 'phone' => 'required|string',
+'email' => 'required|string',
 ]);
-Contact::create($request->only('name', 'phone'));
+Contact::create($request->only('name', 'phone', 'email'));
 return redirect()->route('contacts.index')->with('success', 'Contact
 added successfully!');
 }
