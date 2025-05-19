@@ -7,7 +7,7 @@
 @endif
 <ul>
 @foreach($contacts as $contact)
-<li>{{ $contact->name }} - {{ $contact->phone }}</li>
+<li>{{ $contact->name }} - {{ $contact->phone }} - {{ $contact->email }}</li>
 @endforeach
 </ul>
 @auth

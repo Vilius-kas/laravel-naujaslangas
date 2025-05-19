@@ -12,6 +12,10 @@
 <label>Phone:</label>
 <input type="text" name="phone" required>
 </div>
+<div>
+<label>email:</label>
+<input type="text" name="email" required>
+</div>
 <button type="submit">Save</button>
 </form>
 </div>
