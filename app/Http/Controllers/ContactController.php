@@ -26,4 +26,9 @@ Contact::create($request->only('name', 'phone', 'email'));
 return redirect()->route('contacts.index')->with('success', 'Contact
 added successfully!');
 }
+public function destroy(Contact $contact)
+    {
+        $contact->delete();
+        return redirect()->route('contacts.index')->with('success', 'Contact deleted successfully!');
+    }
 }

@@ -6,10 +6,21 @@
 <div style="color: green">{{ session('success') }}</div>
 @endif
 <ul>
-@foreach($contacts as $contact)
-<li>{{ $contact->name }} - {{ $contact->phone }} - {{ $contact->email }}</li>
-@endforeach
-</ul>
+        @foreach($contacts as $contact)
+            <li>
+                {{ $contact->name }} - {{ $contact->phone }} - {{ $contact->email }}
+
+                @auth
+                    <!-- DELETE forma -->
+                    <form action="{{ route('contacts.destroy', $contact) }}" method="POST" style="display:inline;" onsubmit="return confirm('Ar tikrai nori ištrinti?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" style="color:red;">Delete</button>
+                    </form>
+                @endauth
+            </li>
+        @endforeach
+    </ul>
 @auth
 <a href="{{ route('contacts.create') }}">Add New Contact</a>
 @endauth
