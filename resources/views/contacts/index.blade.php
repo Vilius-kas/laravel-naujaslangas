@@ -2,6 +2,10 @@
 @section('content')
 <div class="container">
 <h2>Contact List</h2>
+
+<a href="{{ route('contacts.trashed') }}">Peržiūrėti ištrintus kontaktus</a>
+<br><br>
+
 @if(session('success'))
 <div style="color: green">{{ session('success') }}</div>
 @endif

@@ -20,5 +20,10 @@ Route::prefix('c')->group(function () {
 Route::get('/', [ContactController::class, 'index'])->name('contacts.index');
 Route::get('/contacts/create', [ContactController::class, 'create'])->middleware('auth')->name('contacts.create');
 Route::post('/contacts', [ContactController::class, 'store'])->middleware('auth')->name('contacts.store');
+Route::post('/contacts/{id}/restore', [ContactController::class, 'restore'])->middleware('auth')->name('contacts.restore');
 Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])->middleware('auth')->name('contacts.destroy');
+
+Route::get('/contacts/trashed', [ContactController::class, 'trashed'])->middleware('auth')->name('contacts.trashed');
+Route::delete('/contacts/{id}/force-delete', [ContactController::class, 'forceDelete'])->middleware('auth')->name('contacts.forceDelete');
+
 });
