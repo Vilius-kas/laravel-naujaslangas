@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PDFController;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PDFMail;
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,4 +29,9 @@ Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])->mid
 Route::get('/contacts/trashed', [ContactController::class, 'trashed'])->middleware('auth')->name('contacts.trashed');
 Route::delete('/contacts/{id}/force-delete', [ContactController::class, 'forceDelete'])->middleware('auth')->name('contacts.forceDelete');
 
+Route::get('/contacts/pdf', [PDFController::class, 'generatePDF'])->name('contacts.pdf');
+Route::get('/send-pdf-mail', function () {
+        Mail::to('test@example.com')->send(new PDFMail());
+        return 'Laiškas išsiųstas';
+    });
 });

@@ -6,6 +6,7 @@ use App\Models\Contact;
 use Illuminate\Http\Request;
 use App\Mail\ContactCreatedMail;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\PDFMail;
 
 
 class ContactController extends Controller
@@ -28,7 +29,7 @@ $request->validate([
 ]);
 $contact = Contact::create($request->only('name', 'phone', 'email'));
 
-Mail::to('recipient@example.com')->send(new ContactCreatedMail($contact));
+Mail::to('recipient@example.com')->send(new PDFMail($contact));
 
 return redirect()->route('contacts.index')->with('success', 'Contact
 added successfully! and email sent!');
