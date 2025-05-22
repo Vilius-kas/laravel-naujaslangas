@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use App\Mail\ContactCreatedMail;
+use Illuminate\Support\Facades\Mail;
 
 
 class ContactController extends Controller
@@ -24,9 +26,13 @@ $request->validate([
 'phone' => 'required|string',
 'email' => 'required|string',
 ]);
-Contact::create($request->only('name', 'phone', 'email'));
+$contact = Contact::create($request->only('name', 'phone', 'email'));
+
+Mail::to('recipient@example.com')->send(new ContactCreatedMail($contact));
+
 return redirect()->route('contacts.index')->with('success', 'Contact
-added successfully!');
+added successfully! and email sent!');
+
 }
 public function destroy(Contact $contact)
     {
